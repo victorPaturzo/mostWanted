@@ -17,7 +17,8 @@ function app(people) {
       searchResults = searchByName(people);
       break;
     case "no":
-      searchResults = searchByEyeColor(people);
+      // searchResults = searchByEyeColor(people);
+      searchResults = searchByOccupation(people);
       break;
     default:
       app(people); // restart app
@@ -88,7 +89,7 @@ function searchByName(people) {
       return false;
     }
   });
-  // TODO: find the person single person object using the name they entered.
+  displayPerson(foundPerson);
   return foundPerson;
 }
 
@@ -98,6 +99,20 @@ function searchByEyeColor(people) {
 
   let foundPerson = people.filter(function (potentialMatch) {
     if (potentialMatch.eyeColor === eyeColor) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+  displayPeople(foundPerson);
+  return foundPerson;
+}
+
+function searchByOccupation(people) {
+  let occupation = promptFor("What is the person's occupation?", autoValid);
+
+  let foundPerson = people.filter(function (potentialMatch) {
+    if (potentialMatch.occupation === occupation) {
       return true;
     } else {
       return false;
