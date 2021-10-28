@@ -17,8 +17,11 @@ function app(people) {
       searchResults = searchByName(people);
       break;
     case "no":
-      // TODO: search by traits
-      // searchResults = searchByEyeColor(people)
+      // searchResults = searchByEyeColor(people);
+      // searchResults = searchByOccupation(people);
+      // searchResults = searchByGender(people);
+      // searchResults = searchByDob(people);
+      searchResults = searchByHeightWeight(people);
       break;
     default:
       app(people); // restart app
@@ -40,9 +43,9 @@ function mainMenu(person, people) {
 
   let displayOption = promptFor(
     "Found " +
-      person.firstName +
+      person[0].firstName +
       " " +
-      person.lastName +
+      person[0].lastName +
       " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'",
     autoValid
   );
@@ -89,25 +92,88 @@ function searchByName(people) {
       return false;
     }
   });
-  // TODO: find the person single person object using the name they entered.
+  displayPerson(foundPerson);
   return foundPerson;
 }
 
-//unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
+//Filter Function Search for Eye Color
 function searchByEyeColor(people) {
   let eyeColor = promptFor("What is the person's eye color?", autoValid);
 
   let foundPerson = people.filter(function (potentialMatch) {
+    if (potentialMatch.eyeColor === eyeColor) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+  displayPeople(foundPerson);
+  return foundPerson;
+}
+
+// Filter Function for Search by Occupation 
+function searchByOccupation(people) {
+  let occupation = promptFor("What is the person's occupation?", autoValid);
+
+  let foundPerson = people.filter(function (potentialMatch) {
+    if (potentialMatch.occupation === occupation) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+  displayPeople(foundPerson);
+  return foundPerson;
+}
+
+// Filter Function for Search by Gender
+function searchByGender(people) {
+  let gender = promptFor("Is the person's gender, male or female?", autoValid);
+
+  let foundPerson = people.filter(function (potentialMatch) {
+    if (potentialMatch.gender === gender) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+  displayPeople(foundPerson);
+  return foundPerson;
+}
+
+// Filter Function for Search by Date of Birth 
+function searchByDob(people) {
+  let dob = promptFor("What is the person's date of birth? (e.g. m/d/yyyy)", autoValid);
+
+  let foundPerson = people.filter(function (potentialMatch) {
+    if (potentialMatch.dob === dob) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+  displayPeople(foundPerson);
+  return foundPerson;
+}
+
+// Filter Function for Search by Height & Weight
+function searchByHeightWeight(people) {
+  let height = parseInt(promptFor("What is the person's height in inches (in)?", autoValid));
+  let weight = parseInt(promptFor("What is the person's weight in pounds (lb)?", autoValid));
+
+  let foundPerson = people.filter(function (potentialMatch) {
     if (
-      potentialMatch.eyeColor === eyeColor
+      potentialMatch.height === height &&
+      potentialMatch.weight === weight
     ) {
       return true;
     } else {
       return false;
     }
   });
-  // TODO: find the person single person object using the name they entered.
-  return foundPerson;}
+  displayPerson(foundPerson);
+  return foundPerson;
+}
 
 //TODO: add other trait filter functions here.
 
@@ -132,12 +198,24 @@ function displayPeople(people) {
 function displayPerson(person) {
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
-  let personInfo = "First Name: " + person.firstName + "\n";
-  personInfo += "Last Name: " + person.lastName + "\n";
+
+  let personInfo = "First Name: " + person[0].firstName + "\n";
+  personInfo += "Last Name: " + person[0].lastName + "\n";
   // TODO: finish getting the rest of the information to display.
   alert(personInfo);
 }
 
+function testPerson() {
+  // print all of the information about a person:
+  // height, weight, age, name, occupation, eye color.
+
+  let personInfo;
+  for (let i = 0; i < data.length; [i++]){
+    if (personInfo === i){
+      alert(personInfo);
+    }
+  }
+}
 //#endregion
 
 //Validation functions.
@@ -153,8 +231,8 @@ function promptFor(question, valid) {
   let isValid;
   let response;
   do {
-    response = prompt(question).trim();
-    isValid = valid(response);
+    response = prompt(question);
+    isValid = autoValid();
   } while (response === "" || isValid === false);
   return response;
 }
@@ -178,4 +256,11 @@ function autoValid(input) {
 //can be used for things like eye color validation for example.
 function customValidation(input) {}
 
+// function searchBySingleCriterion(input) {
+//   let filteredCriterion = [searchByName, searchByEyeColor, searchByDob, searchByGender, searchByOccupation, searchByHeightWeight];
+//   for(let i = 0; i < filteredCriterion.length, [i++];){
+//     if (input === filteredCriterion[0]){
+//       searchByName();
+//     }
+// }
 //#endregion
