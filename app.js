@@ -17,7 +17,7 @@ function app(people) {
       searchResults = searchByName(people);
       break;
     case "no":
-      // TODO: search by traits
+      searchResults = searchByEyeColor(people);
       break;
     default:
       app(people); // restart app
@@ -43,7 +43,7 @@ function mainMenu(person, people) {
       " " +
       person.lastName +
       " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'",
-    autoValid
+    // autoValid
   );
 
   switch (displayOption) {
@@ -75,8 +75,8 @@ function mainMenu(person, people) {
 
 //nearly finished function used to search through an array of people to find matching first and last name and return a SINGLE person object.
 function searchByName(people) {
-  let firstName = promptFor("What is the person's first name?", autoValid);
-  let lastName = promptFor("What is the person's last name?", autoValid);
+  let firstName = promptFor("What is the person's first name?");
+  let lastName = promptFor("What is the person's last name?");
 
   let foundPerson = people.filter(function (potentialMatch) {
     if (
@@ -93,7 +93,19 @@ function searchByName(people) {
 }
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
-function searchByEyeColor(people) {}
+function searchByEyeColor(people) {
+  let eyeColor = promptFor("What is the person's eye color?");
+
+  let foundPerson = people.filter(function (potentialMatch) {
+    if (potentialMatch.eyeColor === eyeColor) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+
+  return foundPerson;
+}
 
 //TODO: add other trait filter functions here.
 
