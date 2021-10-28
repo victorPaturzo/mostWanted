@@ -18,7 +18,10 @@ function app(people) {
       break;
     case "no":
       // searchResults = searchByEyeColor(people);
-      searchResults = searchByOccupation(people);
+      // searchResults = searchByOccupation(people);
+      // searchResults = searchByGender(people);
+      // searchResults = searchByDob(people);
+      searchResults = searchByHeightWeight(people);
       break;
     default:
       app(people); // restart app
@@ -93,7 +96,7 @@ function searchByName(people) {
   return foundPerson;
 }
 
-//unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
+//Filter Function Search for Eye Color
 function searchByEyeColor(people) {
   let eyeColor = promptFor("What is the person's eye color?", autoValid);
 
@@ -108,6 +111,7 @@ function searchByEyeColor(people) {
   return foundPerson;
 }
 
+// Filter Function for Search by Occupation 
 function searchByOccupation(people) {
   let occupation = promptFor("What is the person's occupation?", autoValid);
 
@@ -115,10 +119,61 @@ function searchByOccupation(people) {
     if (potentialMatch.occupation === occupation) {
       return true;
     } else {
+      alert("Could not find individual(s)");
+      app(people); //restart
       return false;
     }
   });
   displayPeople(foundPerson);
+  return foundPerson;
+}
+
+// Filter Function for Search by Gender
+function searchByGender(people) {
+  let gender = promptFor("Is the person's gender, male or female?", autoValid);
+
+  let foundPerson = people.filter(function (potentialMatch) {
+    if (potentialMatch.gender === gender) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+  displayPeople(foundPerson);
+  return foundPerson;
+}
+
+// Filter Function for Search by Date of Birth 
+function searchByDob(people) {
+  let dob = promptFor("What is the person's date of birth? (e.g. m/d/yyyy)", autoValid);
+
+  let foundPerson = people.filter(function (potentialMatch) {
+    if (potentialMatch.dob === dob) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+  displayPeople(foundPerson);
+  return foundPerson;
+}
+
+// Filter Function for Search by Height & Weight
+function searchByHeightWeight(people) {
+  let height = promptFor("What is the person's height in inches (in)?", autoValid);
+  let weight = promptFor("What is the person's weight in pounds (lb)?", autoValid);
+
+  let foundPerson = people.filter(function (potentialMatch) {
+    if (
+      potentialMatch.height === height &&
+      potentialMatch.weight === weight
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+  displayPerson(foundPerson);
   return foundPerson;
 }
 
