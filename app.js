@@ -18,10 +18,10 @@ function app(people) {
       break;
     case "no":
       // searchResults = searchByEyeColor(people);
-      // searchResults = searchByOccupation(people);
+      searchResults = searchByOccupation(people);
       // searchResults = searchByGender(people);
       // searchResults = searchByDob(people);
-      searchResults = searchByHeightWeight(people);
+      // searchResults = searchByHeightWeight(people);
       break;
     default:
       app(people); // restart app
