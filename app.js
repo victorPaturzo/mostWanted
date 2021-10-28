@@ -17,8 +17,9 @@ function app(people) {
       searchResults = searchByName(people);
       break;
     case "no":
+      searchResults = searchBySingleCriterion();
       // searchResults = searchByEyeColor(people);
-      searchResults = searchByOccupation(people);
+      // searchResults = searchByOccupation(people);
       // searchResults = searchByGender(people);
       // searchResults = searchByDob(people);
       // searchResults = searchByHeightWeight(people);
@@ -256,11 +257,33 @@ function autoValid(input) {
 //can be used for things like eye color validation for example.
 function customValidation(input) {}
 
-// function searchBySingleCriterion(input) {
-//   let filteredCriterion = [searchByName, searchByEyeColor, searchByDob, searchByGender, searchByOccupation, searchByHeightWeight];
-//   for(let i = 0; i < filteredCriterion.length, [i++];){
-//     if (input === filteredCriterion[0]){
-//       searchByName();
-//     }
-// }
+function searchBySingleCriterion(input) {
+  let filteredCriterion = prompt("What criterion would you like to search by?\n");
+  switch(filteredCriterion){
+    case "1":
+      searchByEyeColor(people);
+    break;
+    case "2":
+      searchByGender;
+    break;
+    case "3":
+      searchByOccupation;
+    break;
+    case "4":
+      searchByHeightWeight;
+    break;
+    case "5":
+      searchByDob;
+    break;
+    default:
+      app(people);
+    break;
+  
+      // searchResults = searchByEyeColor(people);
+      // searchResults = searchByOccupation(people);
+      // searchResults = searchByGender(people);
+      // searchResults = searchByDob(people);
+      // searchResults = searchByHeightWeight(people);
+    }
+}
 //#endregion
