@@ -39,11 +39,11 @@ function mainMenu(person, people) {
 
   let displayOption = promptFor(
     "Found " +
-      person.firstName +
+      people.firstName +
       " " +
-      person.lastName +
+      people.lastName +
       " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'",
-    // autoValid
+    autoValid
   );
 
   switch (displayOption) {
@@ -75,8 +75,8 @@ function mainMenu(person, people) {
 
 //nearly finished function used to search through an array of people to find matching first and last name and return a SINGLE person object.
 function searchByName(people) {
-  let firstName = promptFor("What is the person's first name?");
-  let lastName = promptFor("What is the person's last name?");
+  let firstName = promptFor("What is the person's first name?", autoValid);
+  let lastName = promptFor("What is the person's last name?", autoValid);
 
   let foundPerson = people.filter(function (potentialMatch) {
     if (
@@ -94,7 +94,7 @@ function searchByName(people) {
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
 function searchByEyeColor(people) {
-  let eyeColor = promptFor("What is the person's eye color?");
+  let eyeColor = promptFor("What is the person's eye color?", autoValid);
 
   let foundPerson = people.filter(function (potentialMatch) {
     if (potentialMatch.eyeColor === eyeColor) {
@@ -103,7 +103,7 @@ function searchByEyeColor(people) {
       return false;
     }
   });
-
+  displayPeople(foundPerson);
   return foundPerson;
 }
 
@@ -151,8 +151,8 @@ function promptFor(question, valid) {
   let isValid;
   let response;
   do {
-    response = prompt(question).trim();
-    isValid = valid(response);
+    response = prompt(question);
+    isValid = autoValid();
   } while (response === "" || isValid === false);
   return response;
 }
