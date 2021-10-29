@@ -17,7 +17,8 @@ function app(people) {
       searchResults = searchByName(people);
       break;
     case "no":
-      searchResults = searchBySingleCriterion(people);
+      searchByMultipleCriterions(people);
+      // searchResults = searchBySingleCriterion(people);
       // searchResults = searchByEyeColor(people);
       // searchResults = searchByOccupation(people);
       // searchResults = searchByGender(people);
@@ -279,5 +280,43 @@ function searchBySingleCriterion(people) {
       app(people);
     break;
     }
+}
+
+function searchByMultipleCriterions(people){
+  let eyeColorCriterion = promptFor("Would you like to search by Eye Color? Yes or No?", yesNo).toLowerCase();
+      if(eyeColorCriterion == "yes"){
+        searchByEyeColor(people);
+      } else if(eyeColorCriterion == "no"){
+        genderCriterion;
+      }
+
+  let genderCriterion = promptFor("Would you like to search by Gender? Yes or No?", yesNo).toLowerCase();
+    if(genderCriterion == "yes"){
+      searchByGender(people);
+    } else if(genderCriterion == "no"){
+      occupationCriterion;
+    }
+
+  let occupationCriterion = promptFor("Would you like to search by Occupation? Yes or No?", yesNo).toLowerCase();
+    if(occupationCriterion == "yes"){
+      searchByOccupation(people);
+    } else if(occupationCriterion == "no"){
+      dobCriterion;
+    }
+
+  let dobCriterion = promptFor("Would you like to search by Date of Birth? Yes or No?", yesNo).toLowerCase();
+    if(dobCriterion == "yes"){
+      searchByDob(people);
+    } else if(dobCriterion == "no"){
+      heightWeightCriterion;
+    }
+
+  let heightWeightCriterion = promptFor("Would you like to search by Height & Weight? Yes or No?", yesNo).toLowerCase();
+    if(heightWeightCriterion == "yes"){
+      searchByHeightWeight(people);
+    } else{
+      mainMenu(person, people);
+    }
+    
 }
 //#endregion
