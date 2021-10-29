@@ -17,7 +17,7 @@ function app(people) {
       searchResults = searchByName(people);
       break;
     case "no":
-      searchResults = searchBySingleCriterion();
+      searchResults = searchBySingleCriterion(people);
       // searchResults = searchByEyeColor(people);
       // searchResults = searchByOccupation(people);
       // searchResults = searchByGender(people);
@@ -261,19 +261,19 @@ function searchBySingleCriterion() {
   let filteredCriterion = promptFor("What criterion would you like to search by?\n\n" + '1 for Eye Color\n' + '2 for Gender\n' + '3 for Occupation\n' + '4 for Height & Weight\n' + '5 for Date of Birth\n');
   switch(filteredCriterion){
     case "1":
-      searchByEyeColor();
+      searchByEyeColor(people);
     break;
     case "2":
-      searchByGender();
+      searchByGender(people);
     break;
     case "3":
-      searchByOccupation();
+      searchByOccupation(people);
     break;
     case "4":
-      searchByHeightWeight();
+      searchByHeightWeight(people);
     break;
     case "5":
-      searchByDob();
+      searchByDob(people);
     break;
     default:
       app(people);
