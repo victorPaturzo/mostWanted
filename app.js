@@ -17,7 +17,7 @@ function app(people) {
       searchResults = searchByName(people);
       break;
     case "no":
-      searchResults = searchBySingleCriterion();
+      //searchResults = searchBySingleCriterion(people);
       // searchResults = searchByEyeColor(people);
       // searchResults = searchByOccupation(people);
       // searchResults = searchByGender(people);
@@ -264,16 +264,16 @@ function searchBySingleCriterion(input) {
       searchByEyeColor(people);
     break;
     case "2":
-      searchByGender;
+      searchByGender(people);
     break;
     case "3":
-      searchByOccupation;
+      searchByOccupation(people);
     break;
     case "4":
-      searchByHeightWeight;
+      searchByHeightWeight(people);
     break;
     case "5":
-      searchByDob;
+      searchByDob(people);
     break;
     default:
       app(people);
