@@ -275,6 +275,11 @@ function autoValid(input) {
 //can be used for things like eye color validation for example.
 function customValidation(input) {}
 
+//#endregion
+
+//Custom Functions
+//#region
+
 function searchBySingleCriterion(people) {
   let filteredCriterion = promptFor("What criterion would you like to search by?\n\n" + '1 for Eye Color\n' + '2 for Gender\n' + '3 for Occupation\n' + '4 for Height & Weight\n' + '5 for Date of Birth\n', autoValid);
   switch(filteredCriterion){
