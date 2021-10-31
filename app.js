@@ -55,7 +55,7 @@ function mainMenu(person, people) {
       displayPerson(person);
       break;
     case "family":
-      // TODO: get person's family
+      displayFamily(person);
       break;
     case "descendants":
       // TODO: get person's descendants
@@ -226,8 +226,13 @@ function displayPerson(person) {
   personInfo += "Weight: " + person[0.].weight + "\n";
   personInfo += "Eye Color: " + person[0.].eyeColor + "\n";
   personInfo += "Occupation: " + person[0.].occupation + "\n";
-  // TODO: finish getting the rest of the information to display.
   alert(personInfo);
+}
+
+function displayFamily(person){
+  let familyInfo = "Parent(s): " + person[0].parents + "\n";
+  familyInfo += "Spouse: " + person[0].currentSpouse + "\n";
+  alert(familyInfo);
 }
 
 //#endregion
