@@ -52,7 +52,7 @@ function mainMenu(person, people) {
 
   switch (displayOption) {
     case "info":
-      // TODO: get person's info
+      displayPerson(person);
       break;
     case "family":
       // TODO: get person's family
@@ -220,21 +220,16 @@ function displayPerson(person) {
 
   let personInfo = "First Name: " + person[0].firstName + "\n";
   personInfo += "Last Name: " + person[0].lastName + "\n";
+  personInfo += "Gender: " + person[0].gender + "\n";
+  personInfo += "DOB: " + person[0].dob + "\n";
+  personInfo += "Height: " + person[0].height + "\n";
+  personInfo += "Weight: " + person[0.].weight + "\n";
+  personInfo += "Eye Color: " + person[0.].eyeColor + "\n";
+  personInfo += "Occupation: " + person[0.].occupation + "\n";
   // TODO: finish getting the rest of the information to display.
   alert(personInfo);
 }
 
-function testPerson() {
-  // print all of the information about a person:
-  // height, weight, age, name, occupation, eye color.
-
-  let personInfo;
-  for (let i = 0; i < data.length; [i++]){
-    if (personInfo === i){
-      alert(personInfo);
-    }
-  }
-}
 //#endregion
 
 //Validation functions.
