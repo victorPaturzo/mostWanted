@@ -78,8 +78,8 @@ function mainMenu(person, people) {
 //Filter Function Search for Full Name
 let foundPerson;
 function searchByName(people) {
-  let firstName = promptFor("What is the person's first name?", autoValid);
-  let lastName = promptFor("What is the person's last name?", autoValid);
+  let firstName = promptFor("What is the person's first name?", autoValid).toLowerCase();
+  let lastName = promptFor("What is the person's last name?", autoValid).toLowerCase();
 
   let foundPerson = people.filter(function (potentialMatch) {
     if (
@@ -96,7 +96,7 @@ function searchByName(people) {
 
 //Filter Function Search for Eye Color
 function searchByEyeColor(people) {
-  let eyeColorAsk = promptFor("Would you like to search by eye color? Yes or No.", yesNo).toLowerCase()
+  let eyeColorAsk = promptFor("Would you like to search by eye color? Yes or No.", autoValid,yesNo).toLowerCase()
   switch (eyeColorAsk){
     case "yes":
       let eyeColor = promptFor("What is the person's eye color?", autoValid);
@@ -116,7 +116,7 @@ function searchByEyeColor(people) {
 
 // Filter Function for Search by Occupation 
 function searchByOccupation(people) {
-  let occupationAsk = promptFor("Would you like to search by occupation? Yes or No.", yesNo).toLowerCase()
+  let occupationAsk = promptFor("Would you like to search by occupation? Yes or No.", autoValid, yesNo).toLowerCase()
   switch (occupationAsk){
     case "yes":
       let occupation = promptFor("What is the person's occupation?", autoValid);
@@ -136,7 +136,7 @@ function searchByOccupation(people) {
 
 // Filter Function for Search by Gender
 function searchByGender(people) {
-  let genderAsk = promptFor("Would you like to search by gender? Yes or No.", yesNo).toLowerCase()
+  let genderAsk = promptFor("Would you like to search by gender? Yes or No.", autoValid, yesNo).toLowerCase()
   switch (genderAsk){
     case "yes":
       let gender = promptFor("What is the person's gender? Male or Female.", autoValid);
@@ -156,7 +156,7 @@ function searchByGender(people) {
 
 // Filter Function for Search by Date of Birth 
 function searchByDob(people) {
-  let dobAsk = promptFor("Would you like to search by date of birth? Yes or No.", yesNo).toLowerCase()
+  let dobAsk = promptFor("Would you like to search by date of birth? Yes or No.", autoValid, yesNo).toLowerCase()
   switch (dobAsk){
     case "yes":
       let dob = promptFor("What is the person's date of birth? Enter as m/d/yyyy.", autoValid);
@@ -176,7 +176,7 @@ function searchByDob(people) {
 
 // Filter Function for Search by Height & Weight
 function searchByHeightWeight(people) {
-  let heightWeightAsk = promptFor("Would you like to search by height and weight? Yes or No.", yesNo).toLowerCase()
+  let heightWeightAsk = promptFor("Would you like to search by height and weight? Yes or No.", autoValid, yesNo).toLowerCase()
   switch (heightWeightAsk){
     case "yes":
       let height = parseInt(promptFor("What is the person's height in inches (in)?", autoValid));
@@ -276,7 +276,7 @@ function autoValid(input) {
 function customValidation(input) {}
 
 function searchBySingleCriterion(people) {
-  let filteredCriterion = promptFor("What criterion would you like to search by?\n\n" + '1 for Eye Color\n' + '2 for Gender\n' + '3 for Occupation\n' + '4 for Height & Weight\n' + '5 for Date of Birth\n');
+  let filteredCriterion = promptFor("What criterion would you like to search by?\n\n" + '1 for Eye Color\n' + '2 for Gender\n' + '3 for Occupation\n' + '4 for Height & Weight\n' + '5 for Date of Birth\n', autoValid);
   switch(filteredCriterion){
     case "1":
       searchByEyeColor(people);
@@ -298,6 +298,5 @@ function searchBySingleCriterion(people) {
     break;
     }
 }
-let eyeColorResult;
 
 //#endregion
