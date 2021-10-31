@@ -80,7 +80,6 @@ function mainMenu(person, people) {
 //#region
 
 //nearly finished function used to search through an array of people to find matching first and last name and return a SINGLE person object.
-let foundPerson;
 function searchByName(people) {
   let firstName = promptFor("What is the person's first name?", autoValid);
   let lastName = promptFor("What is the person's last name?", autoValid);
@@ -95,6 +94,7 @@ function searchByName(people) {
       return false;
     }
   });
+  displayPerson(foundPerson);
   return foundPerson;
 }
 
@@ -109,6 +109,7 @@ function searchByEyeColor(people) {
       return false;
     }
   });
+  displayPeople(foundPerson);
   return foundPerson;
 }
 
@@ -123,6 +124,7 @@ function searchByOccupation(people) {
       return false;
     }
   });
+  displayPeople(foundPerson);
   return foundPerson;
 }
 
@@ -137,6 +139,7 @@ function searchByGender(people) {
       return false;
     }
   });
+  displayPeople(foundPerson);
   return foundPerson;
 }
 
@@ -151,6 +154,7 @@ function searchByDob(people) {
       return false;
     }
   });
+  displayPeople(foundPerson);
   return foundPerson;
 }
 
@@ -169,6 +173,7 @@ function searchByHeightWeight(people) {
       return false;
     }
   });
+  displayPerson(foundPerson);
   return foundPerson;
 }
 
@@ -276,10 +281,11 @@ function searchBySingleCriterion(people) {
     break;
     }
 }
-let eyeColorResult;
+
 function searchByMultipleCriterions(people){
   let eyeColorCriterion = promptFor("Would you like to search by Eye Color? Yes or No?", yesNo).toLowerCase();
       if(eyeColorCriterion == "yes"){
+       searchByEyeColor(people);
        let eyeColorResult = searchByEyeColor(people);
        return eyeColorResult;
       }
