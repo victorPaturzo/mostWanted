@@ -17,23 +17,26 @@ function app(people) {
       searchResults = searchByName(people);
       break;
     case "no":
-      searchByMultipleCriterions(people);
-      // searchResults = searchBySingleCriterion(people);
-      // searchResults = searchByEyeColor(people);
-      // searchResults = searchByOccupation(people);
-      // searchResults = searchByGender(people);
-      // searchResults = searchByDob(people);
-      // searchResults = searchByHeightWeight(people);
+      searchResults = searchByEyeColor(people);
+      searchResults = searchByOccupation(searchResults);
+      searchResults = searchByGender(searchResults);
+      searchResults = searchByDob(searchResults);
+      searchResults = searchByHeightWeight(searchResults);
       break;
     default:
       app(people); // restart app
       break;
   }
-
-  // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
+  displayPeople(searchResults);
+  searchResults = selectResult(searchResults);
   mainMenu(searchResults, people);
 }
 
+function selectResult(results) {
+  alert("Select the individual of which you would like to learn more:" + "\n");
+  return searchByName(results);
+  
+}
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people) {
   /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
@@ -54,10 +57,10 @@ function mainMenu(person, people) {
 
   switch (displayOption) {
     case "info":
-      // TODO: get person's info
+      displayPerson(person);
       break;
     case "family":
-      // TODO: get person's family
+      displayFamily(person);
       break;
     case "descendants":
       // TODO: get person's descendants
@@ -74,12 +77,12 @@ function mainMenu(person, people) {
 
 //#endregion
 
-//Filter functions.
-//Ideally you will have a function for each trait.
-/////////////////////////////////////////////////////////////////
+//Filter Functions
 //#region
 
-//nearly finished function used to search through an array of people to find matching first and last name and return a SINGLE person object.
+
+//Filter Function Search for Full Name
+let foundPerson;
 function searchByName(people) {
   let firstName = promptFor("What is the person's first name?", autoValid);
   let lastName = promptFor("What is the person's last name?", autoValid);
@@ -100,84 +103,113 @@ function searchByName(people) {
 
 //Filter Function Search for Eye Color
 function searchByEyeColor(people) {
-  let eyeColor = promptFor("What is the person's eye color?", autoValid);
 
-  let foundPerson = people.filter(function (potentialMatch) {
-    if (potentialMatch.eyeColor === eyeColor) {
-      return true;
-    } else {
-      return false;
-    }
-  });
-  displayPeople(foundPerson);
-  return foundPerson;
+  let eyeColorAsk = promptFor("Would you like to search by eye color? Yes or No.", autoValid,yesNo).toLowerCase()
+  switch (eyeColorAsk){
+    case "yes":
+      let eyeColor = promptFor("What is the person's eye color?", autoValid);
+      let foundPerson = people.filter(function (potentialMatch) {
+        if (potentialMatch.eyeColor === eyeColor) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      return foundPerson;
+      // break;
+    default:
+      return people;
+  }
 }
 
 // Filter Function for Search by Occupation 
 function searchByOccupation(people) {
-  let occupation = promptFor("What is the person's occupation?", autoValid);
 
-  let foundPerson = people.filter(function (potentialMatch) {
-    if (potentialMatch.occupation === occupation) {
-      return true;
-    } else {
-      return false;
-    }
-  });
-  displayPeople(foundPerson);
-  return foundPerson;
+  let occupationAsk = promptFor("Would you like to search by occupation? Yes or No.", autoValid, yesNo).toLowerCase()
+  switch (occupationAsk){
+    case "yes":
+      let occupation = promptFor("What is the person's occupation?", autoValid);
+      let foundPerson = people.filter(function (potentialMatch) {
+        if (potentialMatch.occupation === occupation) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      return foundPerson;
+      // break;
+    default:
+      return people;
+  }
 }
 
 // Filter Function for Search by Gender
 function searchByGender(people) {
-  let gender = promptFor("Is the person's gender, male or female?", autoValid);
 
-  let foundPerson = people.filter(function (potentialMatch) {
-    if (potentialMatch.gender === gender) {
-      return true;
-    } else {
-      return false;
-    }
-  });
-  displayPeople(foundPerson);
-  return foundPerson;
+  let genderAsk = promptFor("Would you like to search by gender? Yes or No.", autoValid, yesNo).toLowerCase()
+  switch (genderAsk){
+    case "yes":
+      let gender = promptFor("What is the person's gender? Male or Female.", autoValid);
+      let foundPerson = people.filter(function (potentialMatch) {
+        if (potentialMatch.gender === gender) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      return foundPerson;
+      // break;
+    default:
+      return people;
+  }
+
 }
 
 // Filter Function for Search by Date of Birth 
 function searchByDob(people) {
-  let dob = promptFor("What is the person's date of birth? (e.g. m/d/yyyy)", autoValid);
 
-  let foundPerson = people.filter(function (potentialMatch) {
-    if (potentialMatch.dob === dob) {
-      return true;
-    } else {
-      return false;
-    }
-  });
-  displayPeople(foundPerson);
-  return foundPerson;
+  let dobAsk = promptFor("Would you like to search by date of birth? Yes or No.", autoValid, yesNo).toLowerCase()
+  switch (dobAsk){
+    case "yes":
+      let dob = promptFor("What is the person's date of birth? Enter as m/d/yyyy.", autoValid);
+      let foundPerson = people.filter(function (potentialMatch) {
+        if (potentialMatch.dob === dob) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      return foundPerson;
+      // break;
+    default:
+      return people;
+  }
+
 }
 
 // Filter Function for Search by Height & Weight
 function searchByHeightWeight(people) {
-  let height = parseInt(promptFor("What is the person's height in inches (in)?", autoValid));
-  let weight = parseInt(promptFor("What is the person's weight in pounds (lb)?", autoValid));
 
-  let foundPerson = people.filter(function (potentialMatch) {
-    if (
-      potentialMatch.height === height &&
-      potentialMatch.weight === weight
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  });
-  displayPerson(foundPerson);
-  return foundPerson;
+  let heightWeightAsk = promptFor("Would you like to search by height and weight? Yes or No.", autoValid, yesNo).toLowerCase()
+  switch (heightWeightAsk){
+    case "yes":
+      let height = parseInt(promptFor("What is the person's height in inches (in)?", autoValid));
+      let weight = parseInt(promptFor("What is the person's weight in pounds (lb)?", autoValid));
+      let foundPerson = people.filter(function (potentialMatch) {
+        if (potentialMatch.height === height &&
+          potentialMatch.weight === weight) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      return foundPerson;
+      // break;
+    default:
+      return people;
+  }
+
 }
-
-//TODO: add other trait filter functions here.
 
 //#endregion
 
@@ -203,21 +235,21 @@ function displayPerson(person) {
 
   let personInfo = "First Name: " + person[0].firstName + "\n";
   personInfo += "Last Name: " + person[0].lastName + "\n";
-  // TODO: finish getting the rest of the information to display.
+  personInfo += "Gender: " + person[0].gender + "\n";
+  personInfo += "DOB: " + person[0].dob + "\n";
+  personInfo += "Height: " + person[0].height + "\n";
+  personInfo += "Weight: " + person[0.].weight + "\n";
+  personInfo += "Eye Color: " + person[0.].eyeColor + "\n";
+  personInfo += "Occupation: " + person[0.].occupation + "\n";
   alert(personInfo);
 }
 
-function testPerson() {
-  // print all of the information about a person:
-  // height, weight, age, name, occupation, eye color.
-
-  let personInfo;
-  for (let i = 0; i < data.length; [i++]){
-    if (personInfo === i){
-      alert(personInfo);
-    }
-  }
+function displayFamily(person){
+  let familyInfo = "Parent(s): " + person[0].parents + "\n";
+  familyInfo += "Spouse: " + person[0].currentSpouse + "\n";
+  alert(familyInfo);
 }
+
 //#endregion
 
 //Validation functions.
@@ -258,8 +290,13 @@ function autoValid(input) {
 //can be used for things like eye color validation for example.
 function customValidation(input) {}
 
+//#endregion
+
+//Custom Functions
+//#region
+
 function searchBySingleCriterion(people) {
-  let filteredCriterion = promptFor("What criterion would you like to search by?\n\n" + '1 for Eye Color\n' + '2 for Gender\n' + '3 for Occupation\n' + '4 for Height & Weight\n' + '5 for Date of Birth\n');
+  let filteredCriterion = promptFor("What criterion would you like to search by?\n\n" + '1 for Eye Color\n' + '2 for Gender\n' + '3 for Occupation\n' + '4 for Height & Weight\n' + '5 for Date of Birth\n', autoValid);
   switch(filteredCriterion){
     case "1":
       searchByEyeColor(people);
@@ -282,33 +319,5 @@ function searchBySingleCriterion(people) {
     }
 }
 
-function searchByMultipleCriterions(people){
-  let eyeColorCriterion = promptFor("Would you like to search by Eye Color? Yes or No?", yesNo).toLowerCase();
-      if(eyeColorCriterion == "yes"){
-       searchByEyeColor(people);
-       let eyeColorResult = searchByEyeColor(people);
-       return eyeColorResult;
-      }
 
-  let genderCriterion = promptFor("Would you like to search by Gender? Yes or No?", yesNo).toLowerCase();
-    if(genderCriterion == "yes"){
-      searchByGender(eyeColorResult);
-    }
-
-  let occupationCriterion = promptFor("Would you like to search by Occupation? Yes or No?", yesNo).toLowerCase();
-    if(occupationCriterion == "yes"){
-      searchByOccupation(people);
-    }
-
-  let dobCriterion = promptFor("Would you like to search by Date of Birth? Yes or No?", yesNo).toLowerCase();
-    if(dobCriterion == "yes"){
-      searchByDob(people);
-    }
-
-  let heightWeightCriterion = promptFor("Would you like to search by Height & Weight? Yes or No?", yesNo).toLowerCase();
-    if(heightWeightCriterion == "yes"){
-      searchByHeightWeight(people);
-    }
-    
-}
 //#endregion
