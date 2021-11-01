@@ -57,10 +57,10 @@ function mainMenu(person, people) {
 
   switch (displayOption) {
     case "info":
-      displayPerson(person);
+      displayPerson(person, people);
       break;
     case "family":
-      displayFamily(person);
+      displayFamily(person, people);
       break;
     case "descendants":
       // TODO: get person's descendants
@@ -84,8 +84,8 @@ function mainMenu(person, people) {
 //Filter Function Search for Full Name
 let foundPerson;
 function searchByName(people) {
-  let firstName = promptFor("What is the person's first name?", autoValid);
-  let lastName = promptFor("What is the person's last name?", autoValid);
+  let firstName = promptFor("What is the person's first name?(Capitalize first letter)", autoValid);
+  let lastName = promptFor("What is the person's last name?((Capitalize first letter)", autoValid);
 
   let foundPerson = people.filter(function (potentialMatch) {
     if (
@@ -211,6 +211,28 @@ function searchByHeightWeight(people) {
 
 }
 
+function findSpouse(person, people) {
+  let foundSpouse = people.filter(function (potentialMatch) {
+    if (potentialMatch.id === person[0].currentSpouse) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+  return foundSpouse;
+}
+
+function findParents(person, people) {
+  let foundParents = people.filter(function (potentialMatch) {
+    if (potentialMatch.id === person[0].parents) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+  return foundParents;
+}
+
 //#endregion
 
 //Display functions.
@@ -244,9 +266,11 @@ function displayPerson(person) {
   alert(personInfo);
 }
 
-function displayFamily(person){
+function displayFamily(person, people){
+  let foundParents = findParents(person, people);
+  let foundSpouse = findSpouse(person, people);
   let familyInfo = "Parent(s): " + person[0].parents + "\n";
-  familyInfo += "Spouse: " + person[0].currentSpouse + "\n";
+  familyInfo += "Spouse: " + foundSpouse[0].firstName + " " + foundSpouse[0].lastName + "\n";
   alert(familyInfo);
 }
 
